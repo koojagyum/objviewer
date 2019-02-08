@@ -1,6 +1,6 @@
 objviewer
 ----
-objviewer is Python powered Wavefront obj file viewer.
+objviewer is Python powered Wavefront obj file viewer. objviewer uses [PyWavefront](https://github.com/greenmoss/PyWavefront).
 
 ## Prerequisites
 
@@ -16,4 +16,10 @@ You also need to install cmake. In macOS, you can do it with [homebrew](https://
 
 ```
 brew install cmake
+```
+
+## Test run
+
+```
+python -m objviewer.test
 ```
