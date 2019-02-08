@@ -1,0 +1,73 @@
+{
+    "name": "scene pyramid",
+    "resources": [
+        {
+            "type": "model",
+            "filepath": "./pyramid.json"
+        },
+        {
+            "type": "model",
+            "filepath": "./floor.json"
+        },
+        {
+            "type": "model",
+            "filepath": "./cubebox.json"
+        }
+    ],
+    "lights": [
+        {
+            "name": "dirLight",
+            "class": "DirectionalLight",
+            "direction": [-0.2, -0.1, -0.3],
+            "ambient": [0.1, 0.1, 0.1],
+            "diffuse": [1.0, 1.0, 1.0],
+            "specular": [0.0, 0.0, 0.0]
+        },
+        {
+            "name": "pointLight",
+            "class": "PointLight",
+            "constant": 0.0,
+            "linear": 0.0,
+            "quadratic": 0.0,
+            "ambient": [0.0, 0.0, 0.0],
+            "diffuse": [1.0, 1.0, 1.0],
+            "specular": [0.0, 0.0, 0.0]
+        }
+    ],
+    "instances": [
+        {
+            "name": "pyramid",
+            "model": "pyramid",
+            "renderer": "InstanceRenderer",
+            "translation": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0],
+            "scale": [1.0, 1.0, 1.0]
+        },
+        {
+            "name": "floor",
+            "model": "floor",
+            "renderer": "InstanceRenderer",
+            "translation": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0],
+            "scale": [1000.0, 1.0, 1000.0]
+        },
+        {
+            "name": "sky",
+            "model": "cubebox",
+            "renderer": "MonoInstanceRenderer",
+            "translation": [0.0, 0.0, 0.0],
+            "rotation": [0.0, 0.0, 0.0],
+            "scale": [1000.0, 1000.0, 1000.0]
+        }
+    ],
+    "camera": {
+        "position": [57.0, 41.0, 247.0],
+        "up": [0.0, 1.0, 0.0],
+        "rotation": [-90.0, 0.0, 0.0],
+        "fov": 45.0,
+        "aspect_ratio": 1.0,
+        "near_distance": 0.02,
+        "far_distance": 10000.0,
+        "move_speed": 10.0
+    }
+}

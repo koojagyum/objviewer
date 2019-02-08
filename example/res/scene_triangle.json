@@ -1,0 +1,46 @@
+{
+    "name": "scene triangle",
+    "resources": [
+        {
+            "type": "model",
+            "filepath": "./triangle.json"
+        }
+    ],
+    "lights": [
+        {
+            "name": "dirLight",
+            "class": "DirectionalLight",
+            "direction": [-0.2, -0.1, -0.3],
+            "ambient": [0.1, 0.1, 0.1],
+            "diffuse": [1.0, 1.0, 1.0],
+            "specular": [0.0, 0.0, 0.0]
+        }
+    ],
+    "instances": [
+        {
+            "name": "triangle1",
+            "model": "triangle",
+            "renderer": "InstanceRenderer",
+            "translation": [0.0, 0.0, 1.0],
+            "rotation": [45.0, 300.0, 120.0],
+            "scale": [2.2, 1.2, 1.2]
+        },
+        {
+            "name": "triangle2",
+            "model": "triangle",
+            "renderer": "InstanceRenderer",
+            "translation": [1.0, 1.0, 0.0],
+            "rotation": [45.0, 120.0, 180.0],
+            "scale": [3.2, 3.2, 2.2]
+        }
+    ],
+    "camera": {
+        "position": [3.0, 0.0, -10.0],
+        "up": [0.0, 1.0, 0.0],
+        "rotation": [90.0, 0.0, 0.0],
+        "fov": 45.0,
+        "aspect_ratio": 1.0,
+        "near_distance": 0.1,
+        "far_distance": 100.0
+    }
+}
