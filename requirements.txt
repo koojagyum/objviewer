@@ -1,0 +1,9 @@
+dlib
+matplotlib
+numpy
+opencv-python
+Pillow
+PyOpenGL
+pyqt5
+pyrr
+tqdm
