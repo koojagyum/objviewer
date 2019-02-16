@@ -21,5 +21,5 @@ brew install cmake
 ## Test run
 
 ```
-python -m objviewer.test
+python -m objviewer.objview
 ```
