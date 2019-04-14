@@ -15,6 +15,7 @@ from pyglfw.framework import IndexObject
 from pyglfw.framework import VertexObject
 
 
+gl_point_size = 6
 verbose = True
 
 
@@ -104,6 +105,7 @@ class ColorModel:
                  edges=None, faces=None,
                  color=None, attributes=None,
                  draw_point=True,
+                 point_size=gl_point_size,
                  wireframe=False):
         self.name = name
         self._vertices = None
@@ -113,6 +115,7 @@ class ColorModel:
         self._color_pending = None
         self._attrs_pending = None
         self.draw_point = draw_point
+        self.point_size = point_size
 
         self._vertexobj = None
         self._indexobj_edges = None
@@ -148,7 +151,7 @@ class ColorModel:
 
         with self._vertexobj as vo:
             if self.draw_point:
-                glPointSize(8)
+                glPointSize(self.point_size)
                 glDrawArrays(GL_POINTS, 0, vo.vertex_count)
             if self._indexobj_edges is not None:
                 with self._indexobj_edges as ebo:
@@ -272,6 +275,10 @@ class ColorModel:
         self._vertices_pending = value
 
     @property
+    def faces(self):
+        return self._faces
+
+    @property
     def color(self):
         if self._color_pending is not None:
             return self._color_pending
@@ -380,7 +387,8 @@ class TextureModel:
                  vertices=None,
                  edges=None, faces=None,
                  attributes=None,
-                 material=None):
+                 material=None,
+                 point_size=gl_point_size):
         self.name = name
         self._vertices = None
         self._attrs = {}
@@ -394,6 +402,7 @@ class TextureModel:
         self.vertices = vertices
         self.attrs = attributes
         self.material = material
+        self.point_size = point_size
 
         self._edges = edges
         self._faces = faces
@@ -414,7 +423,7 @@ class TextureModel:
 
         with self.material(program):
             with self._vertexobj as vo:
-                glPointSize(8)
+                glPointSize(self.point_size)
                 glDrawArrays(GL_POINTS, 0, vo.vertex_count)
                 if self._indexobj_edges is not None:
                     with self._indexobj_edges as ebo:
