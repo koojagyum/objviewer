@@ -5,6 +5,7 @@ import os
 import sys
 
 from PyQt5.QtCore import pyqtProperty
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QGuiApplication
@@ -14,6 +15,7 @@ from PyQt5.QtQuick import QQuickView
 from pyglfw.camera import set_camera_params
 from pyglfw.instance import ModelInstance
 from pyglfw.instance import MonoInstanceRenderer
+from pyglfw.model import ColorModel
 from pyglfw.mousecamera import MouseCamera
 from pyqt5glfw.qquickglitem import QQuickGLItem
 
@@ -29,6 +31,8 @@ default_camera_params = {
 
 
 class ObjView(QQuickGLItem):
+
+    objModelUpdated = pyqtSignal(ColorModel)
 
     def __init__(
             self,
@@ -58,6 +62,8 @@ class ObjView(QQuickGLItem):
         # make empty
         self.renderer.clear_instances()
         self.renderer.add_instance(instance)
+
+        self.objModelUpdated.emit(model)
 
     @pyqtProperty(str)
     def objSource(self):

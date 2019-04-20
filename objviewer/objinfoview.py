@@ -12,7 +12,9 @@ from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtQml import qmlRegisterType
 from PyQt5.QtQuick import QQuickView
 
-from . objview import ObjView
+from pyglfw.instance import ModelInstance
+
+from .objview import ObjView
 
 
 def _cameraParamDesc(camera):
@@ -27,18 +29,33 @@ def _cameraParamDesc(camera):
 
 class ObjInfoView(ObjView):
 
+    objDescUpdated = pyqtSignal(str)
     cameraParamDescUpdated = pyqtSignal(str)
 
     def __init__(
             self,
             parent=None):
         super(ObjInfoView, self).__init__(parent=parent)
+        self._objDesc = '-'
         self._cameraParamDesc = '-'
         self._updateCameraParamDesc()
 
+        self.objModelUpdated.connect(self.onObjModelUpdated)
         self.keyPressed.connect(self.onCameraUpdate)
         self.mouseEvent.connect(self.onCameraUpdate)
 
+    def onObjModelUpdated(self, model):
+        self._objDesc = 'Name: {}\n'.format(
+            model.name
+        ) + 'Number of vertices: {}\n'.format(
+            model.vertices.shape[0]
+        ) + 'Number of faces: {}'.format(model.faces.shape[0])
+
+        self.objDescUpdated.emit(self._objDesc)
+
+    @pyqtProperty(str, notify=objDescUpdated)
+    def objDesc(self):
+        return self._objDesc
 
     @pyqtProperty(str, notify=cameraParamDescUpdated)
     def cameraParamDesc(self):

@@ -32,6 +32,11 @@ Item {
                         fileDialog.visible = true
                     }
                 }
+
+                Text {
+                    text: objview.objDesc
+                }
+
                 HDivider {}
 
                 Button {
