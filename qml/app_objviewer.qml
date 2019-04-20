@@ -44,7 +44,7 @@ Item {
                 id: fileDialog
                 visible: false
                 title: 'File browser'
-                folder: '../objviewer'
+                folder: '../obj'
                 selectExisting: false
 
                 property var fileDialogType: 0
@@ -70,6 +70,8 @@ Item {
             ObjView {
                 id: objview
                 anchors.fill: parent
+                color: '#333'
+                objSource: 'obj/teapod.obj'
             }
         }
     }

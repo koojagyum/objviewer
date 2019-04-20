@@ -94,7 +94,7 @@ def plot_2ds(verts):
     plt.show()
 
 
-INFILE = 'objviewer/teapod.obj'
+INFILE = 'obj/teapod.obj'
 
 v, e = read_objfile(INFILE)
 
