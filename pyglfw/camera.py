@@ -13,6 +13,40 @@ def debug(msg):
         print(msg)
 
 
+def set_camera_params(camera, params):
+    def _pick(dic, key, default=None):
+        if key not in dic:
+            return default
+        return dic[key]
+
+    v = _pick(params, 'yaw')
+    if v is not None:
+        camera.yaw = v
+    v = _pick(params, 'pitch')
+    if v is not None:
+        camera.pitch = v
+    v = _pick(params, 'position')
+    if v is not None:
+        camera.position = v.copy()
+    v = _pick(params, 'move_speed')
+    if v is not None:
+        camera.SPEED = v
+
+    fov = _pick(params, 'fov', 45.0)
+    aspect_ratio = _pick(params, 'aspect_ratio', 1.0)
+    near_distance = _pick(params, 'near_distance', 0.1)
+    far_distance = _pick(params, 'far_distance', 100.0)
+    projection_type = _pick(params, 'type', 'perspective')
+
+    camera.projection_type = projection_type
+    camera.set_projection(
+        fov,
+        aspect_ratio,
+        near_distance,
+        far_distance
+    )
+
+
 def load_camera(camera_dic):
     def _pick(dic, key):
         if key not in dic:
