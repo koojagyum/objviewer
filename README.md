@@ -2,6 +2,8 @@ objviewer
 ----
 objviewer is Python powered Wavefront obj file viewer. objviewer uses [PyWavefront](https://github.com/greenmoss/PyWavefront).
 
+![](./screenshot.png)
+
 ## Prerequisites
 
 objviewer needs Python3, while it may not work with Python2.
@@ -21,5 +23,5 @@ brew install cmake
 ## Test run
 
 ```
-python -m objviewer.objview
+python -m objviewer.objinfoview
 ```
