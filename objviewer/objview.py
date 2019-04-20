@@ -5,17 +5,27 @@ import os
 import sys
 
 from PyQt5.QtCore import pyqtProperty
+from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtQml import qmlRegisterType
 from PyQt5.QtQuick import QQuickView
 
+from pyglfw.camera import set_camera_params
 from pyglfw.instance import ModelInstance
 from pyglfw.instance import MonoInstanceRenderer
 from pyglfw.mousecamera import MouseCamera
 from pyqt5glfw.qquickglitem import QQuickGLItem
 
 from .loader import load_model
+
+
+default_camera_params = {
+    'yaw': math.radians(270.0),
+    'pitch': math.radians(0.0),
+    'position': np.array([0.0, 1.5, 9.0], dtype=np.float32),
+    'SPEED': 0.3
+}
 
 
 class ObjView(QQuickGLItem):
@@ -28,9 +38,9 @@ class ObjView(QQuickGLItem):
 
         if camera is None:
             camera = MouseCamera(projection_type='perspective')
-            camera.yaw = math.radians(273.0)
-            camera.pitch = math.radians(-15.0)
-            camera.position = np.array([-0.21, 0.63, 3.13], dtype=np.float32)
+
+        self._camera = camera
+        self.resetCamera()
 
         renderer = MonoInstanceRenderer(camera=camera, use_material=False)
 
@@ -67,6 +77,11 @@ class ObjView(QQuickGLItem):
 
         self.update()
 
+    @pyqtSlot()
+    def resetCamera(self):
+        set_camera_params(self._camera, default_camera_params)
+        self.update()
+
 
 def register_qml():
     qmlRegisterType(ObjView, 'ObjViewer', 1, 0, 'ObjView')
@@ -95,7 +110,7 @@ def main():
     args = parser.parse_args()
     verbose = args.verbose
 
-    run_qml('qml/app_objviewer.qml')
+    run_qml('qml/objviewer_simple.qml')
 
 
 if __name__ == '__main__':

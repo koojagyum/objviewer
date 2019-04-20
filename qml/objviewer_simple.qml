@@ -36,7 +36,10 @@ Item {
 
                 Button {
                     text: 'Reset Camera'
-                    enabled: false
+                    enabled: true
+                    onClicked: {
+                        objview.resetCamera()
+                    }
                 }
             }
 
